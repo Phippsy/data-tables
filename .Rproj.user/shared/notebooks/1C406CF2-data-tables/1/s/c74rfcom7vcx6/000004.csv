@@ -1,0 +1,1 @@
+"0","dt[, .(avg_mpg = mean(mpg), avg_wt=mean(wt)), by=am]"

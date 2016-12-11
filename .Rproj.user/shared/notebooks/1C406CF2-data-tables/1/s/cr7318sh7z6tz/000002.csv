@@ -1,0 +1,16 @@
+"0","# just a quick test"
+"0","test <- rstudioapi::getActiveDocumentContext()"
+"0","# data-tables"
+"0","library(data.table)"
+"2","data.table 1.9.6  For help type ?data.table or https://github.com/Rdatatable/data.table/wiki
+"
+"2","The fastest way to learn (by data.table authors): https://www.datacamp.com/courses/data-analysis-the-data-table-way
+"
+"0","dt <- data.table(mtcars)"
+"0","dt[,mean(mpg)]"
+"1","[1]"
+"1"," 20.09062"
+"1","
+"
+"0","# Subsetting - average mpg by am"
+"0","dt[, mean(mpg), by=am]"

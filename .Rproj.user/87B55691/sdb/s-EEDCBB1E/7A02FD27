@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Data Tables\"\noutput:\n  html_document: default\n  html_notebook: default\n---\n\nA refresher on data tables.\n\n## Subsetting\n\n```{r}\n# data-tables\nlibrary(data.table)\ndt <- data.table(mtcars)\ndt[,mean(mpg)]\n\n# Subsetting - average mpg by am\ndt[, mean(mpg), by=am]\ndt[, mean(mpg), by=.(am,cyl)]\n\n# Adding a label for the computed average\ndt[, .(avg = mean(mpg)), by=.(am,cyl)]\n```\nAbove - data table subsetting \n\nThe basic model for all data tables is \nDT[i,j,by]\n\n\n![select](img/select.png)\n\n## Tabulation\n\nN is a special variable telling us how many rows\n```{r}\ndt[, .N]\n```\n\n\nIf we group by a variable, N will tell us the count of rows per group\n```{r}\ndt[, .N, by=cyl]\n```\n\nLet's use this to count the number of rows where wt > 1.5, grouped by am (transmission type)\n\n```{r}\ndt[wt>1.5, .N, by=am]\n```\n\n## Sorting\n\nWe can do this easily and fast. Below - the top 5 vehicles in descending order of mpg\n```{r}\nhead(dt[order(-mpg)], 5)\n```\n\nWe can also sort on multiple keys, and can use a second bracket notation to subset the data, since DT inherits from data.frame.\nThe below sorts by descending mpg and ascending wt.\n```{r}\ndt[order(-mpg,wt)][1:5]\n```\n## Performance benefits - fread instead of read.csv\n\nDT is lightning fast. Let's read in an 80mb csv file.\n\n```{r}\nsystem.time(df.crimes <- read.csv(\"raw-data/chi_crimes.csv\", header=TRUE,sep=\",\"))\nsystem.time(dt.crimes <- fread(\"raw-data/chi_crimes.csv\", header = TRUE, sep = \",\"))\n```\n\n## More summarising\n\nLet's find out the number of unique values in each column in the DT\n```{r}\nsapply(dt.crimes, function(x) length(unique(x)))\n```\n\nNow let's run a xtab of the number of calls per district\n```{r}\ndt.crimes[, .N, by=District][order(-N)]\n```\n\nNow we subset by District and Community area\n```{r}\ndt.crimes[District==20 & `Community Area` ==3][order(-ID)][1:10]\n```\n\n```{r}\ndt[ cyl  %in% c(4,6)][1:5]\n```\n\n### Summarising multiple variables at once\n```{r}\ndt[, .(avg_mpg = mean(mpg), avg_wt=mean(wt)), by=am]\n```\n",
+    "created" : 1481448017279.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2636198481",
+    "id" : "7A02FD27",
+    "lastKnownWriteTime" : 1481448022,
+    "last_content_update" : 1481448022450,
+    "path" : "C:/Dropbox/3-Work/Training/Software stuff/Coding/R/Play/data-tables/README.Rmd",
+    "project_path" : "README.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

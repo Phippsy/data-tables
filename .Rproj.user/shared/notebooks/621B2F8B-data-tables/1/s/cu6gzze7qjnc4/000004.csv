@@ -1,0 +1,4 @@
+"0","```r
+# Adding a label for the computed average
+dt[, .(avg = mean(mpg)), by=.(am,cyl)]
+```"

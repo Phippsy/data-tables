@@ -1,0 +1,19 @@
+"0","```r
+# just a quick test
+test <- rstudioapi::getActiveDocumentContext()
+# data-tables
+library(data.table)
+```"
+"1","data.table 1.9.6  For help type ?data.table or https://github.com/Rdatatable/data.table/wiki
+The fastest way to learn (by data.table authors): https://www.datacamp.com/courses/data-analysis-the-data-table-way
+"
+"0","```r
+dt <- data.table(mtcars)
+dt[,mean(mpg)]
+```"
+"1","[1] 20.09062
+"
+"0","```r
+# Subsetting - average mpg by am
+dt[, mean(mpg), by=am]
+```"
