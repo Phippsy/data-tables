@@ -1,9 +1,8 @@
 ---
 title: "Data Tables"
-
 ---
 
-A refresher on data tables.
+A refresher on data tables. View the R Notebook output at [this link](http://donalphipps.co.uk/rstudio/data-tables.nb.html)
 
 ## Subsetting
 
